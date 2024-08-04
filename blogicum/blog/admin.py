@@ -17,8 +17,9 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'pub_date', 'is_published', 'category', 'location')
+    list_display = ('title', 'author', 'pub_date',
+                    'is_published', 'category', 'location')
     search_fields = ('title', 'text')
     list_filter = ('is_published', 'category', 'location')
-    date_hierarchy = 'pub_date'
+    date_hierarchy = ('pub_date')
     ordering = ('-pub_date',)
