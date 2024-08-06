@@ -7,7 +7,7 @@ from django.http import Http404
 
 def index(request):
     posts = Post.objects.published(
-    ).order_by('-pub_date')[:settings.POSTS_PER_PAGE]
+    ).order_by('-pub_date')[:settings.PAGINATOR]
     context = {'post_list': posts}
     return render(request, 'blog/index.html', context)
 
@@ -15,7 +15,7 @@ def index(request):
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug, is_published=True)
     post_list = category.posts.published(
-    ).order_by('-pub_date')[:settings.POSTS_PER_PAGE]
+    ).order_by('-pub_date')
     context = {'category': category, 'post_list': post_list}
     return render(request, 'blog/category.html', context)
 
